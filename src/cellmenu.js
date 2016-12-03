@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+//import Cell from '/components/cell';
 
-class Cell extends Component {
-  constructor() {
-    super();
-    this.state = { value: null };
-  }
 
-  render() {
-    return (
-      <button className="cell" onClick={() => this.props.onClick()}>
-        {this.state.value}
-      </button>
-    );
-  }
+function Cell(props) {
+  return (
+    <button className="cell" onClick={() => props.onClick()}>
+      {props.value}
+    </button>
+  );
 }
+
 
 class Grid extends Component {
   constructor() {
@@ -29,26 +25,19 @@ class Grid extends Component {
   }
 
   renderCell(i) {
-  return <Cell value={this.state.cells[i]} onClick={() => this.handleClick(i)} />;
+  return <div className="grid-row"><Cell value={this.state.cells[i]} onClick={() => this.handleClick(i)} /></div>;
   }
 
   render() {
     return (
-      <div className="grid-row">
+      <div>
         {this.renderCell(0)}
+        {this.renderCell(1)}
+        {this.renderCell(2)}
+        {this.renderCell(3)}
       </div>
     );
   }
 }
 
-class Menu extends Component {
-  render() {
-    return (
-      <div className="scrollbar" id="style-1">
-        <Grid />
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<Menu />, document.querySelector('.containermenu'));
+ReactDOM.render(<Grid />, document.querySelector('.scrollbar'));
